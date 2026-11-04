@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>宅建業法 無料○×10問｜資格マニア</title>
+<style>
+:root{--navy:#102442;--gold:#d6ac55;--paper:#f5f7fb;--ink:#1e293b}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,"Yu Gothic",Meiryo,sans-serif;line-height:1.75}
+header{background:linear-gradient(125deg,#0b1b35,#193b62);color:white;text-align:center;padding:36px 16px;border-bottom:5px solid var(--gold)}
+header .eyebrow{color:#f2d796;letter-spacing:.12em;font-weight:700;font-size:.85rem}h1{font-size:clamp(1.5rem,5vw,2.3rem);margin:8px 0}header p{margin:6px 0;color:#e1e8f3}
+main{max-width:760px;margin:24px auto;padding:0 15px 40px}.intro,.question,.result{background:white;border-radius:15px;box-shadow:0 5px 22px #11264a13;padding:23px;margin-bottom:18px}.intro p{margin:5px 0}
+.progress{font-weight:700;color:var(--navy);margin:18px 0}.track{height:9px;background:#e3e8f0;border-radius:99px;overflow:hidden;margin-top:7px}.fill{height:100%;background:var(--gold);width:0%;transition:width .25s}
+.question h2{font-size:1.12rem;margin:0 0 12px}.question .number{color:#9a6d20;font-weight:800;font-size:.87rem}.question .prompt{font-size:1.08rem;font-weight:650;margin:12px 0 20px}
+.choices{display:flex;gap:12px}.choices button{flex:1;padding:13px;border:2px solid var(--navy);border-radius:11px;background:white;color:var(--navy);font-size:1.35rem;font-weight:800;cursor:pointer}.choices button:hover:not(:disabled),.choices button:focus-visible{background:#eef3fa}.choices button:disabled{cursor:default;opacity:.65}.choices button.selected{background:var(--navy);color:white;opacity:1}
+.feedback{margin-top:20px;border-left:5px solid var(--gold);background:#f8f6ed;padding:15px;border-radius:7px}.feedback strong{font-size:1.15rem}.feedback p{margin:8px 0}.small{font-size:.85rem;color:#526176}.next,.restart{border:0;background:var(--navy);color:white;border-radius:10px;padding:13px 23px;font-size:1rem;font-weight:700;cursor:pointer;margin-top:17px}.next:hover,.restart:hover{background:#234875}.result{text-align:center}.result h2{color:var(--navy)}.score{font-size:2.7rem;font-weight:900;color:#946a23}.hidden{display:none}footer{text-align:center;font-size:.85rem;color:#556175;padding:0 15px 35px}a{color:#174c8b}button:focus-visible,a:focus-visible{outline:3px solid #c68a1e;outline-offset:3px}
+</style>
+</head>
+<body>
+<header><div class="eyebrow">資格マニア｜宅建合格応援</div><h1>宅建業法 無料○×クイズ10問</h1><p>初心者歓迎！1問ずつ解いて基礎を確認しよう</p></header>
+<main>
+<section class="intro"><p>宅建士試験では、宅建業法は50問中20問を占める重要分野。まずは基本の10問に挑戦してみよう！</p><p class="small">各問題で○か×を選ぶと、正解と解説が表示されます。全問終了後に得点を確認できます。</p></section>
+<div id="progress" class="progress" aria-live="polite"></div>
+<section id="question" class="question" aria-live="polite"></section>
+<section id="result" class="result hidden" aria-live="polite"></section>
+</main>
+<footer><p>© 資格マニア｜宅建合格応援</p><p><a href="https://note.com/keicyankeicyan" target="_blank" rel="noopener noreferrer">noteのプロフィールを見る</a></p><p>学習用の基礎問題です。法令・制度は改正されることがあります。</p></footer>
+<script>
+const questions=[
+ {q:'宅地建物取引業を営むには、原則として宅地建物取引業の免許が必要である。',a:true,e:'宅地建物取引業を営もうとする者は、原則として免許が必要です。単に自分の所有物件を売る行為が、直ちに宅建業に当たるわけではありません。',law:'宅地建物取引業法第3条'},
+ {q:'事務所を2つ以上の都道府県に設置して宅建業を営む場合、国土交通大臣の免許が必要である。',a:true,e:'事務所が2以上の都道府県にある場合は国土交通大臣免許、1つの都道府県内だけなら都道府県知事免許です。',law:'宅地建物取引業法第3条'},
+ {q:'宅地建物取引業の免許の有効期間は、10年間である。',a:false,e:'免許の有効期間は5年間です。10年間ではありません。',law:'宅地建物取引業法第3条'},
+ {q:'宅建業者の事務所では、原則として業務に従事する者5人につき1人以上の割合で、成年者である専任の宅建士を置かなければならない。',a:true,e:'事務所ごとに、業務に従事する者5人に1人以上の割合で、成年者である専任の宅建士が必要です。',law:'宅地建物取引業法第31条の3・同法施行規則第15条の5の3'},
+ {q:'宅建業法35条の重要事項説明は、宅地建物取引士が行わなければならない。',a:true,e:'重要事項説明は宅建士が行います。説明の際には宅建士証の提示も必要です。',law:'宅地建物取引業法第35条'},
+ {q:'重要事項説明書（35条書面）には、宅建士の記名だけでなく押印も法律上必ず必要である。',a:false,e:'35条書面には宅建士の記名が必要ですが、押印は法律上の必須要件ではありません。',law:'宅地建物取引業法第35条'},
+ {q:'契約成立後に交付する37条書面には、宅地建物取引士の記名が必要である。',a:true,e:'37条書面には宅建士の記名が必要です。ただし、37条書面の交付そのものを宅建士だけが行わなければならないわけではありません。',law:'宅地建物取引業法第37条'},
+ {q:'宅建業者が自ら売主となる宅地・建物の売買では、契約した場所に関係なく必ずクーリング・オフできる。',a:false,e:'クーリング・オフには契約場所などの要件があります。事務所等での申込み・契約など、適用されない場合があります。',law:'宅地建物取引業法第37条の2'},
+ {q:'宅建業者が自ら売主となり、宅建業者でない買主から手付を受け取った場合、その手付は原則として解約手付とみなされる。',a:true,e:'この場合、手付は解約手付とみなされます。手付解除ができる時期などには法律上のルールがあります。',law:'宅地建物取引業法第39条'},
+ {q:'売主も買主も宅建業者である売買には、宅建業者が自ら売主となる場合のいわゆる8種制限が原則として適用される。',a:false,e:'宅建業者同士の取引には、いわゆる8種制限（宅建業法第33条の2、第37条の2、第38条～第43条）は適用されません。',law:'宅地建物取引業法第78条第2項'}
+];
+let index=0,score=0,answered=false;
+const qEl=document.getElementById('question'),pEl=document.getElementById('progress'),rEl=document.getElementById('result');
+function render(){answered=false;const item=questions[index];pEl.innerHTML=`第 ${index+1} 問 / ${questions.length} 問 <div class="track"><div class="fill" style="width:${index/questions.length*100}%"></div></div>`;qEl.innerHTML=`<div class="number">QUESTION ${index+1}</div><h2>次の文章は正しい？</h2><p class="prompt">${item.q}</p><div class="choices"><button type="button" data-answer="true" aria-label="まる">○</button><button type="button" data-answer="false" aria-label="ばつ">×</button></div><div id="feedback" class="feedback hidden"></div><button id="next" type="button" class="next hidden">${index===questions.length-1?'結果を見る':'次の問題へ →'}</button>`;qEl.querySelectorAll('[data-answer]').forEach(b=>b.addEventListener('click',()=>answer(b.dataset.answer==='true')));document.getElementById('next').addEventListener('click',next)}
+function answer(choice){if(answered)return;answered=true;const item=questions[index],correct=choice===item.a;if(correct)score++;qEl.querySelectorAll('[data-answer]').forEach(b=>{b.disabled=true;if((b.dataset.answer==='true')===choice)b.classList.add('selected')});const f=document.getElementById('feedback');f.classList.remove('hidden');f.innerHTML=`<strong>${correct?'🎉 正解！':'もう一歩！不正解'}</strong><p>正解は <b>${item.a?'○':'×'}</b> です。</p><p>${item.e}</p><p class="small">参考：${item.law}</p>`;document.getElementById('next').classList.remove('hidden')}
+function next(){index++;if(index<questions.length){render();qEl.scrollIntoView({behavior:'smooth',block:'start'})}else{qEl.classList.add('hidden');pEl.innerHTML='全10問 終了！';rEl.classList.remove('hidden');const percent=Math.round(score/questions.length*100);rEl.innerHTML=`<h2>おつかれさまでした！</h2><div class="score">${score} / ${questions.length} 問正解</div><p>正答率 ${percent}%</p><p>${score===10?'全問正解！すばらしい！':score>=7?'いい調子！間違えた部分を復習しよう。':'解説を読み返して、もう一度挑戦してみよう！'}</p><button class="restart" type="button" id="restart">もう一度挑戦する</button>`;document.getElementById('restart').addEventListener('click',()=>{index=0;score=0;rEl.classList.add('hidden');qEl.classList.remove('hidden');render();window.scrollTo({top:0,behavior:'smooth'})});rEl.scrollIntoView({behavior:'smooth',block:'start'})}}
+render();
+</script>
+</body>
+</html>
